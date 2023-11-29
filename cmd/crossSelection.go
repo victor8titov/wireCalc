@@ -6,8 +6,10 @@ package cmd
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/spf13/cobra"
+	wire_cross_section "github.com/victor8titov/wireCalc/internal"
 )
 
 // crossSelectionCmd represents the crossSelection command
@@ -21,9 +23,17 @@ var crossSelectionCmd = &cobra.Command{
 
 	Run: func(cmd *cobra.Command, args []string) {
 		diameter := args[0]
+		if len(diameter) == 0 {
+			fmt.Println("Нужен диаметр для вычислений")
+			return
+		}
+		d, err := strconv.ParseFloat(diameter, 64)
+		if err != nil {
+			fmt.Println("Error during parse")
+		}
 
-		wire_cross_section.CrossSectionByDiameter()
-		fmt.Println("crossSelection called")
+		cs := wire_cross_section.CrossSectionByDiameter(d)
+		fmt.Println("Сечение провода: ", cs)
 	},
 }
 
