@@ -9,13 +9,13 @@ import (
 	"strconv"
 
 	"github.com/spf13/cobra"
-	wire_cross_section "github.com/victor8titov/wireCalc/internal"
+	calculation "github.com/victor8titov/wireCalc/internal"
 )
 
 // crossSelectionCmd represents the crossSelection command
 var crossSelectionCmd = &cobra.Command{
-	Use:   "crossSelection [diameter]",
-	Short: "Вычисление сечения провода по его диаметру ",
+	Use:   "cs [diameter]",
+	Short: "Вычисление сечения провода по его диаметру (wire cross selection)",
 	Long: `Вычисление провода как для одножильных так
 	 и для многожильных медных проводов
 	`,
@@ -32,7 +32,7 @@ var crossSelectionCmd = &cobra.Command{
 			fmt.Println("Error during parse")
 		}
 
-		cs := wire_cross_section.CrossSectionByDiameter(d)
+		cs := calculation.CrossSectionByDiameter(d)
 		fmt.Println("Сечение провода: ", cs)
 	},
 }
